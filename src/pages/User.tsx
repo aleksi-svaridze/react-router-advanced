@@ -12,11 +12,10 @@ function User() {
       .then((data: IUsers) => setUser(data));
   }, [params.id]);
   return (
-    <div>
-      <h1>
-        {user?.userName} : {user?.userEmail}
-      </h1>
-    </div>
+    <ul className="border-l-2 px-3 py-2 text-red-500">
+      <li>Name: {user?.userName}</li>
+      <li>Email: {user?.userEmail}</li>
+    </ul>
   );
 }
 

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 const FormPage: React.FC = () => {
   const [userName, setUserName] = useState<string>("");
   const [userEmail, setUserEmail] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -30,6 +32,7 @@ const FormPage: React.FC = () => {
 
         setUserName("");
         setUserEmail("");
+        navigate("/users");
 
         console.log("Post created");
       } catch (error) {
@@ -40,24 +43,28 @@ const FormPage: React.FC = () => {
     }
   };
   return (
-    <form>
-      <div>
-        <input
-          type="text"
-          name="userName"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <input
-          type="email"
-          name="email"
-          value={userEmail}
-          onChange={(e) => setUserEmail(e.target.value)}
-        />
-        <button type="submit" onClick={handleSubmit}>
-          Submit
-        </button>
-      </div>
+    <form className="flex flex-col gap-y-5 max-w-1/2 mx-auto">
+      <input
+        className="border rounded p-2"
+        type="text"
+        name="userName"
+        value={userName}
+        onChange={(e) => setUserName(e.target.value)}
+      />
+      <input
+        className="border rounded p-2"
+        type="email"
+        name="email"
+        value={userEmail}
+        onChange={(e) => setUserEmail(e.target.value)}
+      />
+      <button
+        type="submit"
+        onClick={handleSubmit}
+        className="w-1/3 border rounded"
+      >
+        Submit
+      </button>
     </form>
   );
 };
